@@ -1,4 +1,4 @@
-# p4_expressfood 
+# p4food - Project 4 "ExpressFood" 
 ## Front-end Developer Training / Openclassrooms
 
 ## Descritpion
