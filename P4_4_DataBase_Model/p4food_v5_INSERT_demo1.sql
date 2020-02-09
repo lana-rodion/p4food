@@ -1,4 +1,4 @@
-USE `p4food_v4`;
+USE `p4food_v5`;
 
 INSERT INTO `client` 
 (`first_name`,	`last_name`, 	`phone`, 		`password`, 		`email`) 
@@ -62,6 +62,14 @@ VALUES
 (2, 			3, 			1),
 (3, 			2, 			2),
 (3, 			4, 			2);
+
+INSERT INTO `stockdish`
+(`quantity`, `supplier_id`,	`dish_id`)
+VALUES 
+(12, 			1, 			1),
+(14, 			2, 			2),
+(22, 			3, 			3),
+(13, 			4, 			4);
 
 
 
