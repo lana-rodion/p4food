@@ -1,10 +1,10 @@
--- Mon Jan 20 11:59:42 2020
+-- Sun Feb  9 15:17:26 2020
 
-DROP DATABASE IF EXISTS `p4food_v4`;
-CREATE DATABASE `p4food_v4` CHARSET 'utf8'; 
-USE `p4food_v4`;
+DROP DATABASE IF EXISTS `p4food_v5`;
+CREATE DATABASE `p4food_v5` CHARSET 'utf8'; 
+USE `p4food_v5`;
 -- -----------------------------------------------------
--- Table `p4food_v4`.`client`
+-- Table `p4food_v5`.`client`
 -- -----------------------------------------------------
 CREATE TABLE `client`(
   `id` MEDIUMINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -15,7 +15,7 @@ CREATE TABLE `client`(
   `email` VARCHAR(45) NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 -- -----------------------------------------------------
--- Table `p4food_v4`.`supplier`
+-- Table `p4food_v5`.`supplier`
 -- -----------------------------------------------------
 CREATE TABLE `supplier`(
   `id` TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -29,7 +29,7 @@ CREATE TABLE `supplier`(
   `longitude` DECIMAL(8,6) NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 -- -----------------------------------------------------
--- Table `p4food_v4`.`address`
+-- Table `p4food_v5`.`address`
 -- -----------------------------------------------------
 CREATE TABLE `address`(
   `id` MEDIUMINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -43,7 +43,7 @@ CREATE TABLE `address`(
   CONSTRAINT `fk_address_client` FOREIGN KEY(`client_id`) REFERENCES `client`(`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 -- -----------------------------------------------------
--- Table `p4food_v4`.`creditcard`
+-- Table `p4food_v5`.`creditcard`
 -- -----------------------------------------------------
 CREATE TABLE `creditcard` (
   `id` MEDIUMINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -55,7 +55,7 @@ CREATE TABLE `creditcard` (
   CONSTRAINT `fk_creditcard_client` FOREIGN KEY (`client_id`) REFERENCES `client`(`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 -- -----------------------------------------------------
--- Table `p4food_v4`.`payment`
+-- Table `p4food_v5`.`payment`
 -- -----------------------------------------------------
 CREATE TABLE `payment` (
   `id` MEDIUMINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -64,7 +64,7 @@ CREATE TABLE `payment` (
   `validated` TINYINT(1) NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 -- -----------------------------------------------------
--- Table `p4food_v4`.`order`
+-- Table `p4food_v5`.`order`
 -- -----------------------------------------------------
 CREATE TABLE `order` (
   `id` MEDIUMINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -80,7 +80,7 @@ CREATE TABLE `order` (
   CONSTRAINT `fk_order_supplier` FOREIGN KEY (`supplier_id`) REFERENCES `supplier`(`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 -- -----------------------------------------------------
--- Table `p4food_v4`.`dish`
+-- Table `p4food_v5`.`dish`
 -- -----------------------------------------------------
 CREATE TABLE `dish` (
   `id` SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -94,7 +94,7 @@ CREATE TABLE `dish` (
   `dish_picture` VARCHAR(255) NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 -- -----------------------------------------------------
--- Table `p4food_v4`.`quantity`
+-- Table `p4food_v5`.`quantity`
 -- -----------------------------------------------------
 CREATE TABLE `quantity` (
   `quantity` TINYINT UNSIGNED NOT NULL,
@@ -102,4 +102,14 @@ CREATE TABLE `quantity` (
   `order_id` MEDIUMINT UNSIGNED NOT NULL,
   CONSTRAINT `fk_quantity_dish` FOREIGN KEY (`dish_id`) REFERENCES `dish`(`id`),
   CONSTRAINT `fk_quantity_order` FOREIGN KEY (`order_id`) REFERENCES `order`(`id`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+-- -----------------------------------------------------
+-- Table `p4food_v5`.`stockdish`
+-- -----------------------------------------------------
+CREATE TABLE `stockdish` (
+  `quantity` TINYINT UNSIGNED NOT NULL,
+  `supplier_id` TINYINT UNSIGNED NOT NULL,
+  `dish_id` SMALLINT UNSIGNED NOT NULL,
+  CONSTRAINT `fk_stockdish_supplier` FOREIGN KEY (`supplier_id`) REFERENCES `supplier`(`id`),
+  CONSTRAINT `fk_stockdish_dish` FOREIGN KEY (`dish_id`) REFERENCES `dish`(`id`)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;

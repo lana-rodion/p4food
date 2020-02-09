@@ -1,4 +1,4 @@
-USE `p4food_v4`;
+USE `p4food_v5`;
 
 INSERT INTO `client` 
 (`first_name`,	`last_name`, 	`phone`, 		`password`, 		`email`) 
